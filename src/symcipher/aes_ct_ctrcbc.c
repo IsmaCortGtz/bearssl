@@ -39,8 +39,8 @@ xorbuf(void *dst, const void *src, size_t len)
 	unsigned char *d;
 	const unsigned char *s;
 
-	d = dst;
-	s = src;
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
 	while (len -- > 0) {
 		*d ++ ^= *s ++;
 	}
@@ -63,13 +63,13 @@ br_aes_ct_ctrcbc_ctr(const br_aes_ct_ctrcbc_keys *ctx,
 	 * convention, because that's what is expected for purposes of
 	 * incrementing the counter value.
 	 */
-	ivbuf = ctr;
+	ivbuf = (unsigned char *)ctr;
 	iv0 = br_dec32be(ivbuf +  0);
 	iv1 = br_dec32be(ivbuf +  4);
 	iv2 = br_dec32be(ivbuf +  8);
 	iv3 = br_dec32be(ivbuf + 12);
 
-	buf = data;
+	buf = (unsigned char *)data;
 	while (len > 0) {
 		uint32_t q[8], carry;
 		unsigned char tmp[32];
@@ -142,7 +142,7 @@ br_aes_ct_ctrcbc_mac(const br_aes_ct_ctrcbc_keys *ctx,
 
 	br_aes_ct_skey_expand(sk_exp, ctx->num_rounds, ctx->skey);
 
-	buf = data;
+	buf = (const unsigned char *)data;
 	cm0 = br_dec32le((unsigned char *)cbcmac +  0);
 	cm1 = br_dec32le((unsigned char *)cbcmac +  4);
 	cm2 = br_dec32le((unsigned char *)cbcmac +  8);
@@ -201,7 +201,7 @@ br_aes_ct_ctrcbc_encrypt(const br_aes_ct_ctrcbc_keys *ctx,
 	 * convention, because that's what is expected for purposes of
 	 * incrementing the counter value.
 	 */
-	ivbuf = ctr;
+	ivbuf = (unsigned char *)ctr;
 	iv0 = br_dec32be(ivbuf +  0);
 	iv1 = br_dec32be(ivbuf +  4);
 	iv2 = br_dec32be(ivbuf +  8);
@@ -215,7 +215,7 @@ br_aes_ct_ctrcbc_encrypt(const br_aes_ct_ctrcbc_keys *ctx,
 	cm2 = br_dec32le((unsigned char *)cbcmac +  8);
 	cm3 = br_dec32le((unsigned char *)cbcmac + 12);
 
-	buf = data;
+	buf = (unsigned char *)data;
 	first_iter = 1;
 	while (len > 0) {
 		uint32_t q[8], carry;
@@ -330,7 +330,7 @@ br_aes_ct_ctrcbc_decrypt(const br_aes_ct_ctrcbc_keys *ctx,
 	 * convention, because that's what is expected for purposes of
 	 * incrementing the counter value.
 	 */
-	ivbuf = ctr;
+	ivbuf = (unsigned char *)ctr;
 	iv0 = br_dec32be(ivbuf +  0);
 	iv1 = br_dec32be(ivbuf +  4);
 	iv2 = br_dec32be(ivbuf +  8);
@@ -344,7 +344,7 @@ br_aes_ct_ctrcbc_decrypt(const br_aes_ct_ctrcbc_keys *ctx,
 	cm2 = br_dec32le((unsigned char *)cbcmac +  8);
 	cm3 = br_dec32le((unsigned char *)cbcmac + 12);
 
-	buf = data;
+	buf = (unsigned char *)data;
 	while (len > 0) {
 		uint32_t q[8], carry;
 		unsigned char tmp[16];

@@ -90,7 +90,7 @@ br_pem_decoder_push(br_pem_decoder_context *ctx,
 	if (ctx->event) {
 		return 0;
 	}
-	ctx->hbuf = data;
+	ctx->hbuf = (const unsigned char *)data;
 	ctx->hlen = len;
 	br_pem_decoder_run(&ctx->cpu);
 	return len - ctx->hlen;
@@ -210,7 +210,7 @@ static const uint16_t t0_caddr[] = {
 void \
 name(void *ctx) \
 { \
-	t0_context *t0ctx = ctx; \
+	t0_context *t0ctx = (t0_context *)ctx; \
 	t0ctx->ip = &t0_codeblock[0]; \
 	T0_ENTER(t0ctx->ip, t0ctx->rp, slot); \
 }

@@ -39,8 +39,8 @@ xorbuf(void *dst, const void *src, size_t len)
 	unsigned char *d;
 	const unsigned char *s;
 
-	d = dst;
-	s = src;
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
 	while (len -- > 0) {
 		*d ++ ^= *s ++;
 	}
@@ -57,11 +57,11 @@ br_aes_ct_ctr_run(const br_aes_ct_ctr_keys *ctx,
 	uint32_t sk_exp[120];
 
 	br_aes_ct_skey_expand(sk_exp, ctx->num_rounds, ctx->skey);
-	ivbuf = iv;
+	ivbuf = (const unsigned char *)iv;
 	iv0 = br_dec32le(ivbuf);
 	iv1 = br_dec32le(ivbuf + 4);
 	iv2 = br_dec32le(ivbuf + 8);
-	buf = data;
+	buf = (unsigned char *)data;
 	while (len > 0) {
 		uint32_t q[8];
 		unsigned char tmp[32];

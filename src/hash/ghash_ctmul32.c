@@ -107,9 +107,9 @@ br_ghash_ctmul32(void *y, const void *h, const void *data, size_t len)
 	uint32_t yw[4];
 	uint32_t hw[4], hwr[4];
 
-	buf = data;
-	yb = y;
-	hb = h;
+	buf = (const unsigned char *)data;
+	yb = (unsigned char *)y;
+	hb = (const unsigned char *)h;
 	yw[3] = br_dec32be(yb);
 	yw[2] = br_dec32be(yb + 4);
 	yw[1] = br_dec32be(yb + 8);

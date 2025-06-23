@@ -39,8 +39,8 @@ xorbuf(void *dst, const void *src, size_t len)
 	unsigned char *d;
 	const unsigned char *s;
 
-	d = dst;
-	s = src;
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
 	while (len -- > 0) {
 		*d ++ ^= *s ++;
 	}
@@ -60,7 +60,7 @@ br_aes_ct64_ctr_run(const br_aes_ct64_ctr_keys *ctx,
 	memcpy(ivw + 4, ivw, 3 * sizeof(uint32_t));
 	memcpy(ivw + 8, ivw, 3 * sizeof(uint32_t));
 	memcpy(ivw + 12, ivw, 3 * sizeof(uint32_t));
-	buf = data;
+	buf = (unsigned char *)data;
 	while (len > 0) {
 		uint64_t q[8];
 		uint32_t w[16];

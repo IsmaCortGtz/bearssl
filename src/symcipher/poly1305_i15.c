@@ -62,7 +62,7 @@ poly1305_inner(uint16_t *a, const uint16_t *r, const void *data, size_t len)
 {
 	const unsigned char *buf;
 
-	buf = data;
+	buf = (const unsigned char *)data;
 	while (len > 0) {
 		unsigned char tmp[16], rev[16];
 		uint16_t b[10];
@@ -210,7 +210,7 @@ br_poly1305_i15_run(const void *key, const void *iv,
 	 * be little-endian.
 	 */
 	br_i15_encode(tag, 16, acc);
-	byteswap16(tag);
+	byteswap16((unsigned char *)tag);
 
 	/*
 	 * If decrypting, then ChaCha20 runs _after_ Poly1305.

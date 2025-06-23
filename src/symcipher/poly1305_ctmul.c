@@ -68,7 +68,7 @@ poly1305_inner(uint32_t *acc, const uint32_t *r, const void *data, size_t len)
 	a3 = acc[3];
 	a4 = acc[4];
 
-	buf = data;
+	buf = (const unsigned char *)data;
 	while (len > 0) {
 		uint64_t w0, w1, w2, w3, w4;
 		uint64_t c;

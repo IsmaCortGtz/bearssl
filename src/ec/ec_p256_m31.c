@@ -1047,7 +1047,7 @@ p256_decode(p256_jacobian *P, const void *src, size_t len)
 	if (len != 65) {
 		return 0;
 	}
-	buf = src;
+	buf = (const unsigned char *)src;
 
 	/*
 	 * First byte must be 0x04 (uncompressed format). We could support
@@ -1101,7 +1101,7 @@ p256_encode(void *dst, const p256_jacobian *P)
 {
 	unsigned char *buf;
 
-	buf = dst;
+	buf = (unsigned char *)dst;
 	buf[0] = 0x04;
 	le30_to_be8(buf + 1, 32, P->x);
 	le30_to_be8(buf + 33, 32, P->y);

@@ -205,9 +205,9 @@ br_ghash_ctmul(void *y, const void *h, const void *data, size_t len)
 	 * Throughout the loop we handle the y and h values as arrays
 	 * of 32-bit words.
 	 */
-	buf = data;
-	yb = y;
-	hb = h;
+	buf = (const unsigned char *)data;
+	yb = (unsigned char *)y;
+	hb = (const unsigned char *)h;
 	yw[3] = br_dec32be(yb);
 	yw[2] = br_dec32be(yb + 4);
 	yw[1] = br_dec32be(yb + 8);

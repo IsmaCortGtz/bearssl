@@ -631,7 +631,7 @@ point_decode(jacobian *P, const void *src, size_t len, const curve_params *cc)
 	uint32_t r;
 	jacobian Q;
 
-	buf = src;
+	buf = (const unsigned char *)src;
 	point_zero(P, cc);
 	plen = (cc->p[0] - (cc->p[0] >> 4) + 7) >> 3;
 	if (len != 1 + (plen << 1)) {
@@ -672,7 +672,7 @@ point_encode(void *dst, const jacobian *P, const curve_params *cc)
 	size_t plen;
 	jacobian Q, T;
 
-	buf = dst;
+	buf = (unsigned char *)dst;
 	plen = (cc->p[0] - (cc->p[0] >> 4) + 7) >> 3;
 	buf[0] = 0x04;
 	memcpy(&Q, P, sizeof *P);

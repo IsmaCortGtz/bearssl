@@ -943,7 +943,7 @@ static const uint16_t t0_caddr[] = {
 void \
 name(void *ctx) \
 { \
-	t0_context *t0ctx = ctx; \
+	t0_context *t0ctx = (t0_context *)ctx; \
 	t0ctx->ip = &t0_codeblock[0]; \
 	T0_ENTER(t0ctx->ip, t0ctx->rp, slot); \
 }

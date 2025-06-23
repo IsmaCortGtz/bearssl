@@ -47,7 +47,7 @@ poly1305_inner(uint32_t *a, const uint32_t *r, const void *data, size_t len)
 	 */
 	const unsigned char *buf;
 
-	buf = data;
+	buf = (const unsigned char *)data;
 	while (len > 0) {
 		unsigned char tmp[16];
 		uint32_t b[10];

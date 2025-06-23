@@ -39,8 +39,8 @@ xorbuf(void *dst, const void *src, size_t len)
 	unsigned char *d;
 	const unsigned char *s;
 
-	d = dst;
-	s = src;
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
 	while (len -- > 0) {
 		*d ++ ^= *s ++;
 	}
@@ -53,7 +53,7 @@ br_aes_big_ctr_run(const br_aes_big_ctr_keys *ctx,
 {
 	unsigned char *buf;
 
-	buf = data;
+	buf = (unsigned char *)data;
 	while (len > 0) {
 		unsigned char tmp[16];
 

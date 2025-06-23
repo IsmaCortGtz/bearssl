@@ -892,7 +892,7 @@ static const uint16_t t0_caddr[] = {
 void \
 name(void *ctx) \
 { \
-	t0_context *t0ctx = ctx; \
+	t0_context *t0ctx = (t0_context *)ctx; \
 	t0ctx->ip = &t0_codeblock[0]; \
 	T0_ENTER(t0ctx->ip, t0ctx->rp, slot); \
 }
@@ -1590,7 +1590,7 @@ br_ssl_hs_client_run(void *t0ctx)
 				/* strlen */
 
 	void *str = (unsigned char *)ENG + (size_t)T0_POP();
-	T0_PUSH((uint32_t)strlen(str));
+	T0_PUSH((uint32_t)strlen((const char *)str));
 
 				}
 				break;

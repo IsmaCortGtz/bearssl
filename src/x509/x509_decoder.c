@@ -103,7 +103,7 @@ void
 br_x509_decoder_push(br_x509_decoder_context *ctx,
 	const void *data, size_t len)
 {
-	ctx->hbuf = data;
+	ctx->hbuf = (const unsigned char *)data;
 	ctx->hlen = len;
 	br_x509_decoder_run(&ctx->cpu);
 }
@@ -365,7 +365,7 @@ static const uint16_t t0_caddr[] = {
 void \
 name(void *ctx) \
 { \
-	t0_context *t0ctx = ctx; \
+	t0_context *t0ctx = (t0_context *)ctx; \
 	t0ctx->ip = &t0_codeblock[0]; \
 	T0_ENTER(t0ctx->ip, t0ctx->rp, slot); \
 }
